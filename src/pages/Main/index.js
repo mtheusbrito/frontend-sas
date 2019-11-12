@@ -5,7 +5,7 @@ class Main extends React.Component{
     render(){
         return (
             <div>
-                <h2>Main</h2>
+                <h2>Main sdafs</h2>
             </div>
         )
     }

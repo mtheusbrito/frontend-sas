@@ -8,9 +8,9 @@ import SignUp from "~/pages/Auth/SignUp";
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={Main} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/" exact component={Main} />
     </Switch>
   </BrowserRouter>
 );
