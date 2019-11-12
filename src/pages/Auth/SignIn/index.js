@@ -1,25 +1,34 @@
 import React from "react";
 import { Container, SignForm } from "./styles";
 import Button from "~/styles/components/Button.js";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import AuthActions from "~/store/ducks/auth";
+import propTypes from "prop-types";
+
 class SignIn extends React.Component {
+  static propTypes = {
+    signInRequest: propTypes.func.isRequired
+  };
   state = {
     email: "",
     password: ""
   };
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
-
+  handleSubmit = e => {
     e.preventDefault();
-    const {email, password} = this.state;
+    const { email, password } = this.state;
+    const { signInRequest } = this.props;
 
+    signInRequest(email, password);
 
     //função email password
-     
-  }
+  };
+
   render() {
     const { email, password } = this.state;
     return (
@@ -27,10 +36,20 @@ class SignIn extends React.Component {
         <SignForm onSubmit={this.handleSubmit}>
           <h1>Boas vindas</h1>
           <span>Email</span>
-          <input type="email" name="email" value={email} onChange={this.handleInputChange}/>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleInputChange}
+          />
           <span> Senha</span>
-          <input type="password" name="password" value={password} onChange={this.handleInputChange} />
-          <Button size="big" type="submit" >
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={this.handleInputChange}
+          />
+          <Button size="big" type="submit">
             Entrar
           </Button>
         </SignForm>
@@ -39,4 +58,9 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(AuthActions, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);
