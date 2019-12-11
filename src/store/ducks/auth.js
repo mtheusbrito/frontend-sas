@@ -1,7 +1,6 @@
 import { createActions, createReducer } from "reduxsauce";
 import Immutable from "seamless-immutable";
 
-
 //Types e Action Creators
 const { Types, Creators } = createActions({
   signInRequest: ["email", "password"],
@@ -13,10 +12,9 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   //usuario logado ou nao
-  signedIn: false,
-  token: null
+  signedIn: !!localStorage.getItem('@Omni:token'),
+  token: localStorage.getItem("@Omni:token") || null
 });
-
 
 //Reducers
 export const success = (state, { token }) => {
