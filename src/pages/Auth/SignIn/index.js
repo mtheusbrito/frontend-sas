@@ -26,6 +26,7 @@ class SignIn extends React.Component {
 
     signInRequest(email, password);
     // //função email password
+    
 
     console.log("Teste");
   };
