@@ -4,11 +4,11 @@ import Button from "~/styles/components/Button.js";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import AuthActions from "~/store/ducks/auth";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class SignIn extends React.Component {
   static propTypes = {
-    signInRequest: propTypes.func.isRequired
+    signInRequest: PropTypes.func.isRequired
   };
   state = {
     email: "",
@@ -25,8 +25,9 @@ class SignIn extends React.Component {
     const { signInRequest } = this.props;
 
     signInRequest(email, password);
+    // //função email password
 
-    //função email password
+    console.log("Teste");
   };
 
   render() {
@@ -42,14 +43,14 @@ class SignIn extends React.Component {
             value={email}
             onChange={this.handleInputChange}
           />
-          <span> Senha</span>
+          <span>Senha</span>
           <input
             type="password"
             name="password"
             value={password}
             onChange={this.handleInputChange}
           />
-          <Button size="big" type="submit">
+          <Button size="big" type="submit" onClick={this.handleSubmit}>
             Entrar
           </Button>
         </SignForm>
@@ -60,7 +61,4 @@ class SignIn extends React.Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(AuthActions, dispatch);
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignIn);
+export default connect(null, mapDispatchToProps)(SignIn);
