@@ -8328,10 +8328,10 @@ react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.1.tgz#0612786bf19df406502d935494f0450b40b8294f"
   integrity sha512-BXUMf9sIOPXXZWqr7+c5SeOKJykyVr2u0UDzEf4LNGc6taGkQe1A9DFD07umCIXz45RLr9oAAwZbAJ0Pkknfaw==
 
-react-redux-toastr@^7.6.2:
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.6.2.tgz#d57c4492536f0019fb192813275a33ddb597476a"
-  integrity sha512-AiK2eof0S0frmvB8tOTyzq+Rj4huypPGMv4pJTSTuv2GZ2jPJOuGQwb/hz+LaxLt7B+96e5jV/hKa8U7fGD05Q==
+react-redux-toastr@^7.6.4:
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.6.4.tgz#a34e1c99c8b515ec21dfb4292fe687eec66b5603"
+  integrity sha512-BxDX4awy1Oc52p+xTrib23bzGhBp4wxoKnKeQilKY6aXAEnJU4YFUXK/Ag3hdimmn38j46PLvKiYWETFer9BbA==
   dependencies:
     classnames "^2.2.3"
     eventemitter3 "^3.1.0"

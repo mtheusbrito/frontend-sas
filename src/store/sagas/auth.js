@@ -13,11 +13,13 @@ try {
 
     } catch (err) {
         console.log(err);
-        yield put (toastrActions.add({
+        yield put (
+            toastrActions.add({
             type: 'error',
             title: 'Falha no login',
-            message: 'Verifique seu e-mail/Senha' 
+            message: 'Verifique seu e-mail/senha!' 
         }))
 
   }
 }
+  
