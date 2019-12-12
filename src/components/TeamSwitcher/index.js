@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, TeamList, Team } from "./styles";
+import { Container, TeamList, Team, NewTeam } from "./styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import TeamsActions from "~/store/ducks/teams";
+
+import Button from '~/styles/components/Button';
+import Modal from '~/components/Modal';
 class TeamSwitcher extends Component {
   static propTypes = {
     getTeamsRequest: PropTypes.func.isRequired,
     selectTeam: PropTypes.func.isRequired,
+    
+    openTeamModal: PropTypes.func.isRequired,
+    closeTeamModal: PropTypes.func.isRequired,
+    
     teams: PropTypes.shape({
       data: PropTypes.arrayOf(
         PropTypes.shape({
@@ -26,7 +33,7 @@ class TeamSwitcher extends Component {
     selectTeam(team);
   }
   render() {
-    const { teams } = this.props;
+    const { teams, openTeamModal, closeTeamModal } = this.props;
 
     return (
       <Container>
@@ -40,6 +47,21 @@ class TeamSwitcher extends Component {
             </Team>
           ))}
         </TeamList>
+        <NewTeam onClick={openTeamModal}>
+          NOVO 
+        </NewTeam>
+        { teams.teamModalOpen && (
+          <Modal>
+            <h1>Criar time</h1>
+            <form onSubmit={()=> {}}>
+              <span>Nome</span>  
+              <input type='text' name="newTeam"/>
+
+              <Button size="big" type='submit'>Salvar</Button>
+              <Button size = "small" color="gray" onClick={closeTeamModal}>Cancelar</Button>
+            </form>
+          </Modal>
+        ) }
       </Container>
     );
   }

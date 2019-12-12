@@ -27,4 +27,22 @@ export const Team = styled.button`
   &:hover img {
     border-radius: 30%;
   }
+
+`;
+
+export const NewTeam = styled.button`
+color:#FFF;
+width: 50px; 
+height: 50px;
+border-radius: 50%;
+border: 1px dashed  rgba(255,255,255,0.3);
+margin: 0 0 8px;
+background:transparent;
+font-weight: bold;
+transition: all 0.2s;
+
+&:hover{
+   border: 1px dashed rgba(255,255,255, 0.6);
+   color: rgba(255, 255, 255, 0.6);
+}
 `;
