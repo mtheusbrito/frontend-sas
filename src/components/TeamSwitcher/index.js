@@ -1,50 +1,41 @@
 import React, { Component } from "react";
-
+import PropTypes from "prop-types";
 import { Container, TeamList, Team } from "./styles";
-
-export default class TeamSwitcher extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import TeamsActions from "~/store/ducks/teams";
+class TeamSwitcher extends Component {
+  static propTypes = {
+    getTeamsRequest: PropTypes.func.isRequired
+  };
+  componentDidMount() {
+    const { getTeamsRequest } = this.props;
+    getTeamsRequest();
+  }
   render() {
+    const { teams } = this.props;
+
     return (
       <Container>
         <TeamList>
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>{" "}
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>{" "}
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>{" "}
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>{" "}
-          <Team>
-            <img
-              alt="Rocketseat"
-              src="https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=Rocketseat "
-            ></img>
-          </Team>
+          {teams.data.map(team => (
+            <Team key={team.id}>
+              <img
+                alt={team.name}
+                src={`https://ui-avatars.com/api/?font-size=0.33&background=7159c1&color=fff&name=${team.name}`}
+              ></img>
+            </Team>
+          ))}
         </TeamList>
       </Container>
     );
   }
 }
+const mapStateToProps = state => ({
+  teams: state.teams
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(TeamsActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamSwitcher);
