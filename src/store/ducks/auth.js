@@ -31,5 +31,5 @@ export const logout = (state) => state.merge({
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SIGN_IN_SUCCESS]: success,
-  [Types.SIGN_OUT]: logout, 
+  [Types.SIGN_OUT]: logout, 	
 });
