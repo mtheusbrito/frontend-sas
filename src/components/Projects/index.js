@@ -1,68 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Container, Project } from "./styles";
 import Button from "~/styles/components/Button";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import {bindActionCreators} from 'redux';
+import ProjectsActions from '~/store/ducks/projects';
 
-const Projects = ({ activeTeam }) => {
-  if (!activeTeam) return null;
-  return (
-    <Container>
-      <header>
-        <h1>{activeTeam.name}</h1>
-        <div>
-          <Button
-            onClick={() => {
-              console.log("Novo");
-            }}
-          >
-            + Novo
-          </Button>
-          <Button
-            onClick={() => {
-              console.log("Membros");
-            }}
-          >
-            {" "}
-            Membros
-          </Button>
-        </div>
-      </header>
+class Projects extends Component {
 
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-      <Project>
-        <p>Aplicação com React Native</p>
-      </Project>
-    </Container>
-  );
-};
-
-Projects.propTypes = { 
+static propTypes = {
+  getProjectsRequest: PropTypes.func.isRequired,
   activeTeam: PropTypes.shape({
     name: PropTypes.string
-  }).isRequired,
+  }).isRequired
+};
+componentDidMount(){
+  const { getProjectsRequest, activeTeam } = this.props;
+  if (activeTeam ){
+    getProjectsRequest();
+  }
 }
-const mapStateToProps = state => ({
-  activeTeam: state.teams.active
+
+render() {
+  const { activeTeam, projects } = this.props
+    if (!activeTeam) return null;
+    return (
+      <Container>
+        <header>
+          <h1>{activeTeam.name}</h1>
+          <div>
+            <Button onClick={() => {console.log("Novo");}}>+ Novo</Button>
+            <Button onClick={() => {console.log("Membros");}}>Membros</Button>
+          </div>
+        </header>
+
+        {projects.data.map(project => (
+          <Project key={project.id}>
+            <p>{project.title}</p>
+          </Project>
+        ) )}
+      </Container>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ProjectsActions, dispatch);
+
+  const mapStateToProps = state => ({
+  activeTeam: state.teams.active,
+  projects: state.projects, 
 });
-export default connect(mapStateToProps)(Projects);
+export default connect(mapStateToProps, mapDispatchToProps)(Projects);
